@@ -6,3 +6,27 @@
 body {
   padding-top: 56px;
 }
+
+.container {
+  background-color: #ffdb59;
+  padding: 15px;
+  text-emphasis-color: #0c0c0c;;
+
+
+}
+footer {
+  background-color:#ffdb59;
+  padding: 25px;
+  margin-left: 35px;
+  margin-right: 35px;
+  text-decoration-color: #0c0c0c;
+}
+ .btn-primary {
+  background-color:#545454;
+
+ }
+
+ .header_container{
+  margin-left: 25px;
+  margin-right: 25px;
+ }
