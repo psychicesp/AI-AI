@@ -8,14 +8,24 @@ body {
 }
 
 .container {
-  background-color: #ffdb59;
+  background-color: #ffbd59;
   padding: 15px;
+  
   text-emphasis-color: #0c0c0c;;
-
-
 }
+
+ nav { 
+  background-color:#ffbd59;
+  padding: 25px;
+  margin-left: 35px;
+  margin-right: 35px;
+  text-decoration-color: #0c0c0c;
+  text-emphasis-position: center
+
+ } 
+
 footer {
-  background-color:#ffdb59;
+  background-color:#ffbd59;
   padding: 25px;
   margin-left: 35px;
   margin-right: 35px;
@@ -27,6 +37,20 @@ footer {
  }
 
  .header_container{
-  margin-left: 25px;
-  margin-right: 25px;
+  margin-left: 35px;
+  margin-right: 35px;
  }
+/*Carousel*/
+ .carousel-inner img {
+  width: 100%; /* Set width to 100% */
+  margin: auto;
+  padding: 25px;
+  min-height:200px;
+}
+
+/* Hide the carousel text when the screen is less than 600 pixels wide */
+@media (max-width: 600px) {
+.carousel-caption {
+  display: none; 
+}
+}
