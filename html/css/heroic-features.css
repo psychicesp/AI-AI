@@ -13,16 +13,19 @@ body {
   
   text-emphasis-color: #0c0c0c;;
 }
-
+/*! Nav Bar and Footer style*/
  nav { 
   background-color:#ffbd59;
   padding: 25px;
   margin-left: 35px;
   margin-right: 35px;
   text-decoration-color: #0c0c0c;
-  text-emphasis-position: center
-
- } 
+  text-emphasis-position: right
+ }
+_navbarResponsive {
+  text-decoration-color: #0c0c0c;
+  text-emphasis-position: right
+}
 
 footer {
   background-color:#ffbd59;
@@ -47,6 +50,7 @@ footer {
   padding: 25px;
   min-height:200px;
 }
+
 
 /* Hide the carousel text when the screen is less than 600 pixels wide */
 @media (max-width: 600px) {
