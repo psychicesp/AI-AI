@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Ai-Ai - Predictive Analysis</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+
+  <!-- Custom styles for this template -->
+  
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/heroic-features.css" rel="stylesheet">
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg text-black navbar-light">
+    <div class="container">
+      <a class="navbar-brand" href="index.html" ></a>
+      <img src = "../Logos/PNG/BW_YellowBG.png"> 
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Home
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="StLouis_Overview.html">St. Louis Overview</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="Market_Analytics.html">Market Analysis</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Predictive Analysis</a>
+            <span class="sr-only">(current)</span>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="About_Us.html">About Us</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Content -->
+  <div class="header_container">
+    <!-- <div class="row">
+        <div class="col-sm-12 text-center">
+            <h1>Predictive Analysis</h1>
+            <h4><b>Selling a house?</b>  Project the value of your house by with the form below. <br> 
+              <b>Buying a house? </b>Estimate the cost of the area you are looking to buy.  </h4>
+        </div>      
+    </div> -->
+    <!-- Jumbotron Header--> 
+    <header class="jumbotron my-4">
+      <h1 class="display-3">Predictive Analysis</h1>
+      <p class="lead"><h4><b>Buying or Selling?</b> Find out the estimated value of a property. </h4>
+      <!-- <a href="#" class
+      ="btn btn-primary btn-lg">Call to action!</a> -->
+    </header>
+
+    <!-- Page Features -->
+    <form>
+      <div class="form-row">
+        <div class="col-md-4 mb-3">
+          <label for="validationServer01">Zip Code</label>
+          <input type="number" class="form-control is-valid" id="validationServer01" placeholder="12345" required>
+          <div class="valid-feedback">
+            Looks good!
+          </div>
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="validationServer02">Number of Bathrooms</label>
+          <input type="number" class="form-control is-valid" id="validationServer02" placeholder="0" >
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="validationServerUsername">Number of 1/2 Bathrooms</label>
+            <input type="number" class="form-control is-invalid" id="validationServerUsername" placeholder="0" >
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-md-4 mb-3">
+          <label for="validationServer03">Number of Bedrooms</label>
+          <input type="number" class="form-control is-invalid" id="validationServer03" placeholder="1" >
+         </div>
+        <div class="col-md-4 mb-3">
+          <label for="validationServer04">Year Purchased</label>
+          <input type="text" id="yearPicker" class="form-control is-invalid" id="validationServer04" placeholder="2010">
+          
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="validationServer05">Age</label>
+          <input type="number" class="form-control is-invalid" id="validationServer05" placeholder="25" >
+         </div>
+      </div>
+      <div class="form-row">
+        <div class="col-md-4 mb-3">
+          <label for="validationServer03">Lot Size (Acres)</label>
+          <input type="number" class="form-control is-invalid" id="validationServer03" placeholder="0.5" step=".01" >
+         </div>
+        <div class="col-md-4 mb-3">
+          <label for="validationServer04">House Size (Sq Ft)</label>
+          <input type="number" id="yearPicker" class="form-control is-invalid" id="validationServer04" placeholder="2010">
+          
+        </div>
+        <!-- <div class="col-md-4 mb-3">
+          <label for="validationServer05">Age</label>
+          <input type="number" class="form-control is-invalid" id="validationServer05" placeholder="25" required>
+         </div> -->
+      </div>
+
+      <button class="btn btn-primary" type="submit">Submit form</button>
+      
+     
+    </form>
+    <!-- /.row -->
+
+  </div>
+  <!-- /.container -->
+
+  <!-- Footer -->
+  <footer class="py-5">
+    <div class="container">
+      <p class="m-0 text-center text-black">Ai-Ai &copy;2021</p>
+      <p class="m-0 text-center text-black">Produced by John Loucks, Regan Maher and Eric Penrose.</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

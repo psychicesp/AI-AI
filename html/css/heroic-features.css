@@ -51,7 +51,15 @@ footer {
   min-height:200px;
 }
 
+form {
+  background-color:#cecdcd;
+  padding: 25px;
+  margin:  auto;
+  margin-left: 35px;
+  margin-right: 35px;
+  margin-bottom: 35px;
 
+}
 /* Hide the carousel text when the screen is less than 600 pixels wide */
 @media (max-width: 600px) {
 .carousel-caption {
