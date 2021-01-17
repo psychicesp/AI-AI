@@ -9,14 +9,13 @@ date_format = "%m/%d/%Y"
 # %%
 
 complete_df = pd.read_csv('real_estate_data_complete_ESPcopy.csv')
-complete_df = complete_df[complete_df['RetZipCode'].notna()]
 complete_df['Zip_Code'] = complete_df['RetZipCode'].apply(lambda x: float(x))
 zip_df = pd.read_csv('zipcode_data.csv')
 zip_df['Zip_Code'] = zip_df['Zip_Code'].apply(lambda x: float(x))
 zip_df['Water_Land_Percent'] = (zip_df['Water Area'] / zip_df['Land Area'])*100
 combined_df = complete_df.merge(zip_df, on = 'Zip_Code', how = 'outer')
+combined_df.set_index('MLS')
 combined_df['Combined_Baths'] = combined_df['Full_Baths']+(combined_df['Half_Baths']/2)
-combined_df.head()
 missing_zips = pd.read_csv('MissingZips.csv').set_index('MLS')
 missing_zips.dropna(subset = ['RetZipCode'], inplace = True)
 for index, row in missing_zips.iterrows():
@@ -30,14 +29,16 @@ def num_cleaner(x):
         return x
     except:
         pass
-combined_df['Year_sold'] = combined_df['Status_Date'].apply(lambda x: int(dt.strptime(x, date_format).year))
-combined_df['Month_sold'] = combined_df['Status_Date'].apply(lambda x: int(dt.strptime(x, date_format).month))
-combined_df['Days_since'] = combined_df['Status_Date'].apply(lambda x: (dt.strptime(x, date_format)-dt.strptime("1/1/2010", date_format)).days)
-combined_df['Status_Date'] = combined_df['Status_Date'].apply(lambda x: dt.strptime(x, date_format))
+combined_df = combined_df[combined_df['Status_Date'].notna()]
+combined_df['Year_sold'] = combined_df['Status_Date'].apply(lambda x: int(dt.strptime(str(x), date_format).year))
+combined_df['Month_sold'] = combined_df['Status_Date'].apply(lambda x: int(dt.strptime(str(x), date_format).month))
+combined_df['Days_since'] = combined_df['Status_Date'].apply(lambda x: (dt.strptime(str(x), date_format)-dt.strptime("1/1/2010", date_format)).days)
+combined_df['Status_Date'] = combined_df['Status_Date'].apply(lambda x: dt.strptime(str(x), date_format))
+combined_df['Years_since'] = combined_df['Year_sold']-2009
 combined_df['Median Household Income'] = combined_df['Median Household Income'].apply(num_cleaner)
 combined_df['Median Home Value'] = combined_df['Median Home Value'].apply(num_cleaner)
 combined_df['Population Density'] = combined_df['Population Density'].apply(num_cleaner)
-combined_df = combined_df[['MLS', 'Price', 'Bedrooms','Age','Square_Footage','Acres', 'Combined_Baths','RetZipCode','Population Density','Median Home Value','Water_Land_Percent', 'Median Household Income', 'Status_Date', 'Days_since','Year_sold','Month_sold']]
+combined_df = combined_df[['MLS', 'Price', 'Bedrooms','Age','Square_Footage','Acres', 'Combined_Baths','RetZipCode','Population Density','Median Home Value','Water_Land_Percent', 'Median Household Income', 'Status_Date', 'Days_since','Year_sold','Month_sold', 'Years_since']]
 combined_df = combined_df.set_index('MLS')
 combined_df.dropna()
 for index, row in combined_df.iterrows():
@@ -56,6 +57,7 @@ for index, row in combined_df.iterrows():
             combined_df.drop(index = index, inplace = True, axis = 1)
         except:
             pass
+combined_df.dropna(inplace=True)
 combined_df.to_csv('combined.csv')
 # %%
 def Scatter_w_Trend(df,x,y, y_limit=None):
