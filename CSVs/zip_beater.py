@@ -17,6 +17,10 @@ zip_df['Water_Land_Percent'] = (zip_df['Water Area'] / zip_df['Land Area'])*100
 combined_df = complete_df.merge(zip_df, on = 'Zip_Code', how = 'outer')
 combined_df['Combined_Baths'] = combined_df['Full_Baths']+(combined_df['Half_Baths']/2)
 combined_df.head()
+missing_zips = pd.read_csv('MissingZips.csv').set_index('MLS')
+missing_zips.dropna(subset = ['RetZipCode'], inplace = True)
+for index, row in missing_zips.iterrows():
+    combined_df.loc[index, 'RetZipCode'] = row['RetZipCode']
 # %%
 def num_cleaner(x):
     try:
@@ -86,29 +90,29 @@ X_values.remove('Status_Date')
 X_values.remove('Year_sold')
 X_values.remove('Month_sold')
 # %%
-# for value in X_values:
-#     try:
-#         Scatter_w_Trend(combined_df, value, 'Price', )
-#         plt.title(f"Price vs {value}")
-#         plt.xlabel(value)
-#         plt.ylabel("Price")
-#         plt.show()
-#     except:
-#         print(f"Error with {value}")
-# %%
-zip_controlled_df = combined_df[['Price', 'Population Density','Median Home Value','Water_Land_Percent', 'Median Household Income']]
-zip_controlled_df['Price_Transformed'] = zip_controlled_df['Price']/zip_controlled['Median Household Income']
-X_values = zip_controlled_df.columns.to_list()
-X_values.remove('Price')
-X_values.remove('Price_Transformed')
-X_values.remove('RetZipCode')
-# %%
 for value in X_values:
     try:
-        Scatter_w_Trend(combined_df, value, 'Price_Transformed', )
+        Scatter_w_Trend(combined_df, value, 'Price', )
         plt.title(f"Price vs {value}")
         plt.xlabel(value)
         plt.ylabel("Price")
         plt.show()
     except:
         print(f"Error with {value}")
+# %%
+zip_controlled_df = combined_df[['Price', 'Population Density','Median Home Value','Water_Land_Percent', 'Median Household Income']]
+zip_controlled_df['Price_Transformed'] = zip_controlled_df['Price']/zip_controlled_df['Median Household Income']
+X_values = zip_controlled_df.columns.to_list()
+X_values.remove('Price')
+X_values.remove('Price_Transformed')
+# %%
+for value in X_values:
+    try:
+        Scatter_w_Trend(zip_controlled_df, value, 'Price_Transformed', )
+        plt.title(f"Price vs {value}")
+        plt.xlabel(value)
+        plt.ylabel('Price_Transformed')
+        plt.show()
+    except:
+        print(f"Error with {value}")
+# %%
