@@ -3,6 +3,9 @@ import pandas as pd
 from matplotlib import pyplot as plt
 import matplotlib
 from scipy import stats as st
+from datetime import datetime as dt
+from datetime import timedelta
+date_format = "%m/%d/%Y"
 # %%
 
 complete_df = pd.read_csv('real_estate_data_complete_ESPcopy.csv')
@@ -23,14 +26,18 @@ def num_cleaner(x):
         return x
     except:
         pass
+combined_df['Year_sold'] = combined_df['Status_Date'].apply(lambda x: int(dt.strptime(x, date_format).year))
+combined_df['Month_sold'] = combined_df['Status_Date'].apply(lambda x: int(dt.strptime(x, date_format).month))
+combined_df['Days_since'] = combined_df['Status_Date'].apply(lambda x: (dt.strptime(x, date_format)-dt.strptime("1/1/2010", date_format)).days)
+combined_df['Status_Date'] = combined_df['Status_Date'].apply(lambda x: dt.strptime(x, date_format))
 combined_df['Median Household Income'] = combined_df['Median Household Income'].apply(num_cleaner)
 combined_df['Median Home Value'] = combined_df['Median Home Value'].apply(num_cleaner)
 combined_df['Population Density'] = combined_df['Population Density'].apply(num_cleaner)
-combined_df = combined_df[['MLS', 'Price', 'Bedrooms','Age','Square_Footage','Acres', 'Combined_Baths','RetZipCode','Population Density','Median Home Value','Water_Land_Percent', 'Median Household Income']]
+combined_df = combined_df[['MLS', 'Price', 'Bedrooms','Age','Square_Footage','Acres', 'Combined_Baths','RetZipCode','Population Density','Median Home Value','Water_Land_Percent', 'Median Household Income', 'Status_Date', 'Days_since','Year_sold','Month_sold']]
 combined_df = combined_df.set_index('MLS')
 combined_df.dropna()
 for index, row in combined_df.iterrows():
-    if (row['Age'] >= 4000) or (row['Acres']>5) or (row['Square_Footage']>20000) or (row['Square_Footage']<= 200) or (row['Combined_Baths']<1):
+    if (row['Age'] >= 4000) or (row['Acres']>5) or (row['Square_Footage']>20000) or (row['Square_Footage']<= 200) or (row['Combined_Baths']<1)or (row['Bedrooms']<1)or(row['Combined_Baths']>=12 or (row['Bedrooms']>=15)):
         try:
             combined_df.drop(index = index, inplace = True, axis = 1)
         except:
@@ -75,14 +82,33 @@ def Scatter_w_Trend(df,x,y, y_limit=None):
 X_values = combined_df.columns.to_list()
 X_values.remove('Price')
 X_values.remove('RetZipCode')
+X_values.remove('Status_Date')
+X_values.remove('Year_sold')
+X_values.remove('Month_sold')
+# %%
+# for value in X_values:
+#     try:
+#         Scatter_w_Trend(combined_df, value, 'Price', )
+#         plt.title(f"Price vs {value}")
+#         plt.xlabel(value)
+#         plt.ylabel("Price")
+#         plt.show()
+#     except:
+#         print(f"Error with {value}")
+# %%
+zip_controlled_df = combined_df[['Price', 'Population Density','Median Home Value','Water_Land_Percent', 'Median Household Income']]
+zip_controlled_df['Price_Transformed'] = zip_controlled_df['Price']/zip_controlled['Median Household Income']
+X_values = zip_controlled_df.columns.to_list()
+X_values.remove('Price')
+X_values.remove('Price_Transformed')
+X_values.remove('RetZipCode')
 # %%
 for value in X_values:
     try:
-        Scatter_w_Trend(combined_df, value, 'Price', )
+        Scatter_w_Trend(combined_df, value, 'Price_Transformed', )
         plt.title(f"Price vs {value}")
         plt.xlabel(value)
         plt.ylabel("Price")
         plt.show()
     except:
         print(f"Error with {value}")
-# %%
