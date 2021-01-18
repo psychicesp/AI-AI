@@ -3,7 +3,6 @@ import pickle
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
-from sklearn.model_selection import GridSearchCV
 file_location = "../CSVs/combined.csv"
 df = pd.read_csv(file_location).set_index("MLS")
 df = df[['Price', 'Bedrooms','Age','Square_Footage','Acres', 'Combined_Baths','Population Density','Median Home Value','Water_Land_Percent', 'Median Household Income', 'Years_since']]
@@ -31,5 +30,12 @@ line_model = line_model.fit(X_train,y_train)
 print(f"Training Data Score: {line_model.score(X_train, y_train)}")
 print(f"Testing Data Score: {line_model.score(X_test, y_test)}")
 # %%
+#Our goals with the linear model is more descriptive than predictive so we'll use the whole data set to train
+line_model = LinearRegression()
+line_model = line_model.fit(X,y)
+
+print(f"Training Data Score: {line_model.score(X, y)}")
+#%%
 with open('pickle_jar/line_model.pickle', 'wb') as bread_butter:
     pickle.dump(line_model,bread_butter)
+# %%
