@@ -9,23 +9,28 @@ with open('pickle_jar/split_data.pickle', 'rb') as dill:
     X_train, X_hp_train, X_test, y_train,y_hp_train, y_test = pickle.load(dill)
 
 #%%
-knr_model = KNeighborsRegressor(n_jobs = -3)
+knr_model = KNeighborsRegressor(
+    n_jobs = -3,
+    algorithm = 'ball_tree',
+    leaf_size = 40,
+    n_neighbors = 20,
+    p = 1,
+    weights = 'distance')
 knr_model = knr_model.fit(X_train,y_train)
 
 print(f"Training Data Score: {knr_model.score(X_train, y_train)}")
 print(f"Testing Data Score: {knr_model.score(X_test, y_test)}")
 # %%
 param_grid = {
-    'n_neighbors':[3,4,5,6, 7],
-    'leaf_size':[10,20,30,40,50],
+    'n_neighbors':[3,4,5,6,7,8,9,10,15,20],
+    'leaf_size':[10,20,30,40,50,60,70,80,90,100],
     'p': [1,2],
-    'weights':['uniform','distance'],
-    'algorithm':['auto', 'ball_tree', 'kd_tree','brute'],
+    'weights':['distance'],
+    'algorithm':['auto', 'ball_tree', 'kd_tree'],
     'n_jobs':[1]
 }
 grid = GridSearchCV(knr_model, param_grid, verbose=4, cv = 5, n_jobs = -4)
 grid.fit(X_hp_train, y_hp_train)
-#%%
 print(grid.best_params_)
 print(grid.best_score_)
 #%%
