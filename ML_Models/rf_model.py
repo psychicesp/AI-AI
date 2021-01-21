@@ -5,7 +5,6 @@ from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import GridSearchCV
 #%%
-#A second split for a Hyperparameter tuning set for a final Fit/Tune/Test split of 60/20/20
 with open('pickle_jar/split_data.pickle', 'rb') as dill:
     X_train, X_hp_train, X_test, y_train,y_hp_train, y_test = pickle.load(dill)
 
