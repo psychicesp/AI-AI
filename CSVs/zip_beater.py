@@ -58,7 +58,9 @@ for index, row in combined_df.iterrows():
         except:
             pass
 combined_df.dropna(inplace=True)
-combined_df.to_csv('combined.csv')
+combined_df.reset_index()
+combined_df = combined_df.groupby('MLS').first()
+combined_df.set_index('MLS').to_csv('combined.csv')
 # %%
 def Scatter_w_Trend(df,x,y, y_limit=None):
     try:
