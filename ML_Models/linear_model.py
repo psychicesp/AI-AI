@@ -4,6 +4,7 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn.preprocessing import MinMaxScaler
+from sklearn.metrics import make_scorer
 import numpy as np
 file_location = "../CSVs/combined.csv"
 df = pd.read_csv(file_location).set_index("MLS")
@@ -11,7 +12,6 @@ df = df[['Price', 'Bedrooms','Age','Square_Footage','Acres', 'Combined_Baths','P
 df.dropna(inplace = True)
 with open('pickle_jar/MLdf.pickle', 'wb') as kosher:
     pickle.dump(df,kosher)
-df
 #%%
 X = df.drop('Price', axis = 1)
 y = df['Price']
@@ -25,6 +25,17 @@ split_data = (X_train, X_hp_train, X_test, y_train,y_hp_train, y_test)
 with open('pickle_jar/split_data.pickle', 'wb') as dill:
     pickle.dump(split_data,dill)
 
+def scoring_function(x,y):
+    acc = 0
+    lengt = range(len(y))
+    for i in lengt:
+        if abs((x-y)/y) <= 0.05:
+            acc+=1
+    return acc/lengt
+
+my_scorer = make_scorer(scoring_function, greater_is_better = True)
+with open('pickle_jar/scorer.pickle', 'wb') as spear:
+    pickle.dump(my_scorer,spear)
 #%%
 # line_model = LinearRegression()
 # line_model = line_model.fit(X_train,y_train)
@@ -45,9 +56,9 @@ Xm_test = minmax.transform(X_test)
 # ym_test = price_scaler.transform(y_test)
 
 line_model = LinearRegression()
-line_model = line_model.fit(Xm_train,y_train)
+line_model = line_model.fit(X,y)
 
-print(f"Training Data Score: {line_model.score(X, y_test)}")
+print(f"Training Data Score: {line_model.score(X, y)}")
 #%%
 with open('pickle_jar/line_model.pickle', 'wb') as bread_butter:
     pickle.dump(line_model,bread_butter)
