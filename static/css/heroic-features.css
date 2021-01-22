@@ -63,7 +63,8 @@ form {
 }
 /* About Us Page Cards */
 .jumbotron {  
-  background-size: cover; 
+  background-position: center;
+  background-size: cover;
 }
 
 .card-horizontal {
