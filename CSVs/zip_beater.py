@@ -39,8 +39,9 @@ combined_df['Status_Date'] = combined_df['Status_Date'].apply(lambda x: dt.strpt
 combined_df['Years_since'] = combined_df['Year_sold']-2009
 combined_df['Median Household Income'] = combined_df['Median Household Income'].apply(num_cleaner)
 combined_df['Median Home Value'] = combined_df['Median Home Value'].apply(num_cleaner)
+combined_df['CDOM'] = combined_df['CDOM'].apply(num_cleaner)
 combined_df['Population Density'] = combined_df['Population Density'].apply(num_cleaner)
-combined_df = combined_df[['MLS', 'Price', 'Bedrooms','Age','Square_Footage','Acres', 'Combined_Baths','RetZipCode','Population Density','Median Home Value','Water_Land_Percent', 'Median Household Income', 'Status_Date', 'Days_since','Year_sold','Month_sold', 'Years_since']]
+combined_df = combined_df[['MLS', 'Price', 'Bedrooms','Age','Square_Footage','Acres', 'Combined_Baths','RetZipCode','Population Density','Median Home Value','Water_Land_Percent', 'Median Household Income', 'Status_Date', 'Days_since','Year_sold','Month_sold', 'Years_since', 'CDOM']]
 combined_df = combined_df.set_index('MLS')
 combined_df.dropna()
 for index, row in combined_df.iterrows():
@@ -62,7 +63,7 @@ for index, row in combined_df.iterrows():
 combined_df.dropna(inplace=True)
 combined_df.reset_index()
 combined_df = combined_df.groupby('MLS').first()
-combined_df.set_index('MLS').to_csv('combined.csv')
+combined_df.to_csv('combined.csv')
 # %%
 def Scatter_w_Trend(df,x,y, y_limit=None):
     try:
