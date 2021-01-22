@@ -12,10 +12,7 @@ with open('pickle_jar/split_data.pickle', 'rb') as dill:
     X_train, X_hp_train, X_test, y_train,y_hp_train, y_test = pickle.load(dill)
 
 def scoring_function(y,x):
-    acc = np.sum(np.abs((x-y)/y) <0.05)/len(x)
-    acc += np.sum(np.abs((x-y)/y) <0.05)/(len(x)*4)
-    acc += np.sum(np.abs((x-y)/y) <0.05)/(len(x)*10)
-    return acc
+    return np.sum(np.abs((x-y)/y) <0.05)/len(x)
 my_scorer = make_scorer(scoring_function, greater_is_better = True)
 #%%
 rf_model = RandomForestRegressor(random_state = 91, n_jobs = -3, max_features = 'sqrt', min_samples_leaf=8, min_samples_split=2, n_estimators = 160, max_depth = 25)
