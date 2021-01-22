@@ -15,6 +15,8 @@ zip_df['Zip_Code'] = zip_df['Zip_Code'].apply(lambda x: float(x))
 zip_df['Water_Land_Percent'] = (zip_df['Water Area'] / zip_df['Land Area'])*100
 combined_df = complete_df.merge(zip_df, on = 'Zip_Code', how = 'outer')
 combined_df.set_index('MLS')
+combined_df = combined_df[combined_df['P_Type']=='RESI']
+combined_df = combined_df[combined_df['St']=='S']
 combined_df['Combined_Baths'] = combined_df['Full_Baths']+(combined_df['Half_Baths']/2)
 missing_zips = pd.read_csv('MissingZips.csv').set_index('MLS')
 missing_zips.dropna(subset = ['RetZipCode'], inplace = True)
@@ -42,7 +44,7 @@ combined_df = combined_df[['MLS', 'Price', 'Bedrooms','Age','Square_Footage','Ac
 combined_df = combined_df.set_index('MLS')
 combined_df.dropna()
 for index, row in combined_df.iterrows():
-    if (row['Age'] >= 4000) or (row['Acres']>5) or (row['Square_Footage']>20000) or (row['Square_Footage']<= 200) or (row['Combined_Baths']<1)or (row['Bedrooms']<1)or(row['Combined_Baths']>=12 or (row['Bedrooms']>=15)):
+    if (row['Age'] >= 4000) or (row['Acres']>5) or (row['Square_Footage']>20000) or (row['Square_Footage']<= 200) or (row['Combined_Baths']<1)or (row['Bedrooms']<1)or(row['Combined_Baths']>=12) or (row['Bedrooms']>=15)or (row['Price']<25000)or (row['Price']>750000):
         try:
             combined_df.drop(index = index, inplace = True, axis = 1)
         except:
