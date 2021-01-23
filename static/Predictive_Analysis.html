@@ -68,47 +68,47 @@
       </header>
 
     <!-- Page Features -->
-    <form>
+    <form action = "/form" method ="POST">
       <div class="form-row">
         <div class="col-md-4 mb-3">
           <label for="validationServer01">Zip Code</label>
-          <input type="number" class="form-control is-valid" id="validationServer01" placeholder="12345" required>
+          <input type="number" class="form-control is-valid" id="validationServer01" placeholder="12345" name= 'zipcode' required>
           <div class="valid-feedback">
             Looks good!
           </div>
         </div>
         <div class="col-md-4 mb-3">
           <label for="validationServer02">Number of Bathrooms</label>
-          <input type="number" class="form-control is-valid" id="validationServer02" placeholder="0" >
+          <input type="number" class="form-control is-valid" id="validationServer02" placeholder="2" name= 'bathrooms' >
         </div>
         <div class="col-md-4 mb-3">
           <label for="validationServer03">Number of 1/2 Bathrooms</label>
-            <input type="number" class="form-control is-valid" id="validationServer03" placeholder="0" >
+            <input type="number" class="form-control is-valid" id="validationServer03" placeholder="0" name= 'halfbaths' >
         </div>
       </div>
       <div class="form-row">
         <div class="col-md-4 mb-3">
           <label for="validationServer04">Number of Bedrooms</label>
-          <input type="number" class="form-control is-valid" id="validationServer04" placeholder="1" >
+          <input type="number" class="form-control is-valid" id="validationServer04" placeholder="1" name= 'bedrooms' >
          </div>
         <div class="col-md-4 mb-3">
           <label for="validationServer05">Year Purchased</label>
-          <input type="text" id="yearPicker" class="form-control is-valid" id="validationServer05" placeholder="2010">
+          <input type="text" id="yearPicker" class="form-control is-valid" id="validationServer05" placeholder="2010" name = 'purchaseyear'>
           
         </div>
         <div class="col-md-4 mb-3">
-          <label for="validationServer06">Age</label>
-          <input type="number" class="form-control is-valid" id="validationServer06" placeholder="25" >
+          <label for="validationServer06">Age of Home</label>
+          <input type="number" class="form-control is-valid" id="validationServer06" placeholder="25" name = 'ageofhome' >
          </div>
       </div>
       <div class="form-row">
         <div class="col-md-4 mb-3">
           <label for="validationServer07">Lot Size (Acres)</label>
-          <input type="number" class="form-control is-valid" id="validationServer07" placeholder="0.5" step=".01" >
+          <input type="number" class="form-control is-valid" id="validationServer07" placeholder="0.5" step=".01" name ='acres' >
          </div>
         <div class="col-md-4 mb-3">
           <label for="validationServer08">House Size (Sq Ft)</label>
-          <input type="number" id="yearPicker" class="form-control is-valid" id="validationServer08" placeholder="2010">
+          <input type="number" id="yearPicker" class="form-control is-valid" id="validationServer08" placeholder="2010" name = 'housesize'>
           
         </div>
 

@@ -34,6 +34,23 @@ app = Flask(__name__)
 def home():
     return render_template('index.html')
 
+@app.route("/Predictive_Analysis")
+def Predictive_Analysis():
+    return render_template('Predictive_Analysis.html')
+
+#NEW!!!!!! Just following the video
+# @app.route("/form", methods = ["POST"])
+# def form():
+      zipcode = request.form.get("zipcode")
+      bathrooms = request.form.get("bathrooms")
+      halfbaths = request.form.get("halfbaths")
+      bedrooms = request.form.get("bedrooms")
+      purchaseyear = request.form.get("purchaseyear")
+      ageofhome = request.form.get("ageofhome")
+      acres = request.form.get("acres")
+      housesize =  request.form.get("housesize")
+#     return render_template('form.html')
+
 # this is how we send data to javascript
 @app.route("/api/TBD")
 def race_stats():
