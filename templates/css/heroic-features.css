@@ -1,0 +1,85 @@
+/*!
+ * Start Bootstrap - Heroic Features (https://startbootstrap.com/template/heroic-features)
+ * Copyright 2013-2020 Start Bootstrap
+ * Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-heroic-features/blob/master/LICENSE)
+ */
+body {
+  padding-top: 56px;
+}
+
+.container {
+  background-color: #ffbd59;
+  padding: 15px;
+  
+  text-emphasis-color: #0c0c0c;;
+}
+/*! Nav Bar and Footer style*/
+ nav { 
+  background-color:#ffbd59;
+  padding: 25px;
+  margin-left: 35px;
+  margin-right: 35px;
+  text-decoration-color: #0c0c0c;
+  text-emphasis-position: right
+ }
+
+_navbarResponsive {
+  text-decoration-color: #0c0c0c;
+  text-emphasis-position: right
+}
+
+footer {
+  background-color:#ffbd59;
+  padding: 25px;
+  margin-left: 35px;
+  margin-right: 35px;
+  text-decoration-color: #0c0c0c;
+}
+ .btn-primary {
+  background-color:#545454;
+
+ }
+
+ .header_container{
+  margin-left: 35px;
+  margin-right: 35px;
+ }
+/*Carousel*/
+ .carousel-inner img {
+  width: 100%; /* Set width to 100% */
+  margin: auto;
+  padding: 25px;
+  min-height:200px;
+}
+
+form {
+  background-color:#cecdcd;
+  padding: 25px;
+  margin:  auto;
+  margin-left: 35px;
+  margin-right: 35px;
+  margin-bottom: 35px;
+
+}
+/* About Us Page Cards */
+.jumbotron {  
+  background-position: center;
+  background-size: cover;
+}
+
+.card-horizontal {
+  display: flex;
+  flex: 1 1 auto;
+}
+.card {
+  padding: 25px;
+  margin-left: 35px;
+  margin-right: 35px;
+  margin-bottom: 35px;
+}
+/* Hide the carousel text when the screen is less than 600 pixels wide */
+@media (max-width: 600px) {
+.carousel-caption {
+  display: none; 
+}
+}
