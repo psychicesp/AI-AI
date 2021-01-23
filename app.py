@@ -1,5 +1,6 @@
+#%%
 import numpy as np
-
+import pickle
 import sqlalchemy
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
@@ -7,7 +8,15 @@ from sqlalchemy import create_engine, func
 import pandas as pd
 from flask import Flask, jsonify, render_template, request, send_from_directory
 
+with open('ML_Models/pickle_jar/rf_model.pickle', 'rb') as dill:
+    rf_model = pickle.load(dill)
 
+zip_df = pd.read_csv('zipcode_data.csv')
+zip_df = zip_df.set_index('Zip_Code')
+
+
+
+#%%
 #################################################
 # Database Setup
 #################################################
@@ -63,17 +72,25 @@ def Predictive_Analysis():
     return render_template('Predictive_Analysis.html')
 
 # NEW!!!!!! Just following the video
-@app.route("/form", methods = ["GET", "POST"])
+@app.route("/form", methods = ["POST"])
 def form():
-    zipcode = request.form.get("zipcode")
-    bathrooms = request.form.get("bathrooms")
-    halfbaths = request.form.get("halfbaths")
-    bedrooms = request.form.get("bedrooms")
-    purchaseyear = request.form.get("purchaseyear")
-    ageofhome = request.form.get("ageofhome")
-    acres = request.form.get("acres")
-    housesize =  request.form.get("housesize")
-    return render_template('form.html')
+    zipcode = int(request.form.get("zipcode"))
+    pop_dense = zip_df.loc[zipcode, "Population Density"]
+    med_value = zip_df.loc[zipcode, "Median Home Value"]
+    med_income = zip_df.loc[zipcode, "Median Household Income"]
+    w_l_ratio = zip_df.loc[zipcode, "Water_Land_Percent"]
+    bathrooms = int(request.form.get("bathrooms"))
+    halfbaths = int(request.form.get("halfbaths"))
+    baths = bathrooms +(halfbaths/2)
+    bedrooms = int(request.form.get("bedrooms"))
+    ageofhome = int(request.form.get("ageofhome"))
+    acres = float(request.form.get("acres"))
+    housesize =  int(request.form.get("housesize"))
+    house_info = (bedrooms, ageofhome, housesize, acres, baths, pop_dense, med_value, w_l_ratio, med_income, 0, 25)
+    house_info = np.reshape(house_info,(1,-1))
+    estimate = '${:,.2f}'.format(round(rf_model.predict(house_info)[0],2))
+# Bedrooms,	Age, Square_Footage, Acres, Combined_Baths, Population Density, Median Home Value, Water_Land_Percent, Median Household Income, Years_since, CDOM
+    return render_template('Predictive_Analysis.html', estimate = estimate)
 
 # this is how we send data to javascript
 @app.route("/api/TBD")
