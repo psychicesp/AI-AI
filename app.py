@@ -5,7 +5,7 @@ from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
 from sqlalchemy import create_engine, func
 import pandas as pd
-from flask import Flask, jsonify, render_template
+from flask import Flask, jsonify, render_template, request
 
 
 #################################################
@@ -15,9 +15,9 @@ from flask import Flask, jsonify, render_template
 #engine = create_engine("sqlite:///")
 
 # reflect an existing database into a new model
-Base = automap_base()
-# reflect the tables
-Base.prepare(engine, reflect=True)
+# Base = automap_base()
+# # reflect the tables
+# Base.prepare(engine, reflect=True)
 
 
 
@@ -32,24 +32,24 @@ app = Flask(__name__)
 #################################################
 @app.route("/")
 def home():
-    return render_template('index.html')
+    return render_template('static/index.html')
 
 @app.route("/Predictive_Analysis")
 def Predictive_Analysis():
     return render_template('Predictive_Analysis.html')
 
-#NEW!!!!!! Just following the video
-# @app.route("/form", methods = ["POST"])
-# def form():
-      zipcode = request.form.get("zipcode")
-      bathrooms = request.form.get("bathrooms")
-      halfbaths = request.form.get("halfbaths")
-      bedrooms = request.form.get("bedrooms")
-      purchaseyear = request.form.get("purchaseyear")
-      ageofhome = request.form.get("ageofhome")
-      acres = request.form.get("acres")
-      housesize =  request.form.get("housesize")
-#     return render_template('form.html')
+# NEW!!!!!! Just following the video
+@app.route("/form", methods = ["GET", "POST"])
+def form():
+    zipcode = request.form.get("zipcode")
+    bathrooms = request.form.get("bathrooms")
+    halfbaths = request.form.get("halfbaths")
+    bedrooms = request.form.get("bedrooms")
+    purchaseyear = request.form.get("purchaseyear")
+    ageofhome = request.form.get("ageofhome")
+    acres = request.form.get("acres")
+    housesize =  request.form.get("housesize")
+    return render_template('form.html')
 
 # this is how we send data to javascript
 @app.route("/api/TBD")
