@@ -28,11 +28,11 @@ input_df['combined_test'] = 1
 input_df = input_df.merge(price_row, how = 'outer',on ='MLS')
 
 for index, row in input_df.iterrows():
-    if (abs(row['rf_prediction']-row['Price'])/row['Price']) > 0.10:
+    if (abs(row['rf_prediction']-row['Price'])/row['Price']) > 0.05:
         input_df.loc[index, 'rf_test'] = 0 
-    if (abs(row['knr_prediction']-row['Price'])/row['Price']) > 0.10:
+    if (abs(row['knr_prediction']-row['Price'])/row['Price']) > 0.05:
         input_df.loc[index, 'knr_test'] = 0 
-    if (abs(row['combined_prediction']-row['Price'])/row['Price']) > 0.10:
+    if (abs(row['combined_prediction']-row['Price'])/row['Price']) > 0.05:
         input_df.loc[index, 'combined_test'] = 0 
 
 #%%
