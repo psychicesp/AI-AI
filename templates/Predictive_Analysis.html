@@ -68,6 +68,13 @@
       </header>
 
     <!-- Page Features -->
+    <!-- <script>
+      let bathrooms = {{ bathrooms }};
+      let bedrooms = {{ bedrooms }};
+      let ageofhome = {{ ageofhome }}
+      let acres = {{ acres }}
+      let housesize = {{ housesize }}
+    </script> -->
     <form action = "/form" method ="POST">
       <div class="form-row">
         <div class="col-md-4 mb-3">
@@ -79,17 +86,17 @@
         </div>
         <div class="col-md-4 mb-3">
           <label for="validationServer02">Number of Bathrooms</label>
-          <input type="number" class="form-control is-valid" id="validationServer02" placeholder="2" name= 'bathrooms' >
+          <input type="number" class="form-control is-valid" id="validationServer02" value= "{{ bathrooms }}" name= 'bathrooms' >
         </div>
         <div class="col-md-4 mb-3">
           <label for="validationServer03">Number of 1/2 Bathrooms</label>
-            <input type="number" class="form-control is-valid" id="validationServer03" placeholder="0" name= 'halfbaths' >
+            <input type="number" class="form-control is-valid" id="validationServer03" value = "0" name= 'halfbaths' >
         </div>
       </div>
       <div class="form-row">
         <div class="col-md-4 mb-3">
           <label for="validationServer04">Number of Bedrooms</label>
-          <input type="number" class="form-control is-valid" id="validationServer04" placeholder="1" name= 'bedrooms' >
+          <input type="number" class="form-control is-valid" id="validationServer04" value = "{{ bedrooms }}" name= 'bedrooms' >
          </div>
         <div class="col-md-4 mb-3">
           <label for="validationServer05">Year Purchased</label>
@@ -98,17 +105,17 @@
         </div>
         <div class="col-md-4 mb-3">
           <label for="validationServer06">Age of Home</label>
-          <input type="number" class="form-control is-valid" id="validationServer06" placeholder="25" name = 'ageofhome' >
+          <input type="number" class="form-control is-valid" id="validationServer06" value = "{{ ageofhome }}" name = 'ageofhome' >
          </div>
       </div>
       <div class="form-row">
         <div class="col-md-4 mb-3">
           <label for="validationServer07">Lot Size (Acres)</label>
-          <input type="number" class="form-control is-valid" id="validationServer07" placeholder="0.5" step=".01" name ='acres' >
+          <input type="number" class="form-control is-valid" id="validationServer07" value = "{{ acres }}" name ='acres' step = 0.001 >
          </div>
         <div class="col-md-4 mb-3">
           <label for="validationServer08">House Size (Sq Ft)</label>
-          <input type="number" id="yearPicker" class="form-control is-valid" id="validationServer08" placeholder="2010" name = 'housesize'>
+          <input type="number" id="yearPicker" class="form-control is-valid" id="validationServer08" value = "{{ housesize }}" name = 'housesize'>
           
         </div>
 
@@ -129,7 +136,7 @@
     <!-- /.row -->
     <div class="row">
       <div class="col-md-12 text-center">
-        <h3> The estimate cost of a property with your specifics is: {{ estimate }}</h3>
+        <h3> The estimate cost of a property with your specifics is:</h3> <h2>{{ estimate }}</h2>
         <div id="predictiveprice"></div>
       </div>
   </div>

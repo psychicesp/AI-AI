@@ -75,22 +75,52 @@ def Predictive_Analysis():
 @app.route("/form", methods = ["POST"])
 def form():
     zipcode = int(request.form.get("zipcode"))
-    pop_dense = zip_df.loc[zipcode, "Population Density"]
-    med_value = zip_df.loc[zipcode, "Median Home Value"]
-    med_income = zip_df.loc[zipcode, "Median Household Income"]
-    w_l_ratio = zip_df.loc[zipcode, "Water_Land_Percent"]
-    bathrooms = int(request.form.get("bathrooms"))
-    halfbaths = int(request.form.get("halfbaths"))
+    try:
+        pop_dense = zip_df.loc[zipcode, "Population Density"]
+    except:
+        pop_dense = 2580
+    try:
+        med_value = zip_df.loc[zipcode, "Median Home Value"]
+    except:
+        med_value = 198000
+    try:
+        med_income = zip_df.loc[zipcode, "Median Household Income"]
+    except: 
+        med_income = 65861
+    try:
+        w_l_ratio = zip_df.loc[zipcode, "Water_Land_Percent"]
+    except:
+        w_l_ratio = 0
+    try:
+        bathrooms = int(request.form.get("bathrooms"))
+    except:
+        bathrooms = 2
+    try:
+        halfbaths = int(request.form.get("halfbaths"))
+    except:
+        halfbaths = 0
     baths = bathrooms +(halfbaths/2)
-    bedrooms = int(request.form.get("bedrooms"))
-    ageofhome = int(request.form.get("ageofhome"))
-    acres = float(request.form.get("acres"))
-    housesize =  int(request.form.get("housesize"))
-    house_info = (bedrooms, ageofhome, housesize, acres, baths, pop_dense, med_value, w_l_ratio, med_income, 0, 25)
+    try:
+        bedrooms = int(request.form.get("bedrooms"))
+    except:
+        bedrooms = 3
+    try:
+        ageofhome = int(request.form.get("ageofhome"))
+    except:
+        ageofhome = 54
+    try:
+        acres = float(request.form.get("acres"))
+    except:
+        acres = 0.2
+    try:
+        housesize =  int(request.form.get("housesize")) 
+    except:
+        housesize = 1600
+    house_info = (bedrooms, ageofhome, housesize, acres, baths, pop_dense, med_value, w_l_ratio, med_income, 0, 29)
     house_info = np.reshape(house_info,(1,-1))
     estimate = '${:,.2f}'.format(round(rf_model.predict(house_info)[0],2))
 # Bedrooms,	Age, Square_Footage, Acres, Combined_Baths, Population Density, Median Home Value, Water_Land_Percent, Median Household Income, Years_since, CDOM
-    return render_template('Predictive_Analysis.html', estimate = estimate)
+    return render_template('Predictive_Analysis.html', estimate = estimate, bathrooms = bathrooms, bedrooms = bedrooms, ageofhome = ageofhome, acres = acres, housesize = housesize)
 
 # this is how we send data to javascript
 @app.route("/api/TBD")
