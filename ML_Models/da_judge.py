@@ -25,15 +25,43 @@ input_df['rf_test'] = 1
 input_df['knr_test'] = 1
 input_df['combined_test'] = 1
 
+input_df['rf_off'] = 1
+input_df['knr_off'] = 1
+input_df['combined_off'] = 1
+
 input_df = input_df.merge(price_row, how = 'outer',on ='MLS')
 
-for index, row in input_df.iterrows():
-    if (abs(row['rf_prediction']-row['Price'])/row['Price']) > 0.10:
-        input_df.loc[index, 'rf_test'] = 0 
-    if (abs(row['knr_prediction']-row['Price'])/row['Price']) > 0.10:
-        input_df.loc[index, 'knr_test'] = 0 
-    if (abs(row['combined_prediction']-row['Price'])/row['Price']) > 0.10:
-        input_df.loc[index, 'combined_test'] = 0 
+def rf_guesser(row):
+    return (abs(row['rf_prediction']-row['Price'])/row['Price'])
+def knr_guesser(row):
+    return (abs(row['knr_prediction']-row['Price'])/row['Price'])
+def combined_guesser(row):
+    return (abs(row['combined_prediction']-row['Price'])/row['Price'])
+
+input_df['rf_off'] = input_df.apply(rf_guesser, axis = 1)
+input_df['knr_off'] = input_df.apply(knr_guesser, axis = 1)
+input_df['combined_off'] = input_df.apply(combined_guesser, axis = 1)
+
+def rf_checker(row):
+    if row['rf_off'] < 0.05:
+        return 1
+    else:
+        return 0
+    return (abs(row['rf_prediction']-row['Price'])/row['Price'])
+def knr_checker(row):
+    if row['knr_off'] < 0.05:
+        return 1
+    else:
+        return 0
+def combined_checker(row):
+    if row['combined_off'] < 0.05:
+        return 1
+    else:
+        return 0
+
+input_df['rf_test'] = input_df.apply(rf_checker, axis = 1)
+input_df['knr_test'] = input_df.apply(knr_checker, axis = 1)
+input_df['combined_test'] = input_df.apply(combined_checker, axis = 1)
 
 #%%
 input_df.to_csv('../CSVs/test.csv')

@@ -5,7 +5,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import make_scorer
-from sklearn.cluster import KMeans
+from sklearn.cluster import SpectralClustering
 import numpy as np
 
 #%%
@@ -17,8 +17,10 @@ def scoring_function(y,x):
     return np.sum(np.abs((x-y)/y) <0.05)/len(x)
 my_scorer = make_scorer(scoring_function, greater_is_better = True)
 
-cluster = KMeans()
+cluster = SpectralClustering(n_jobs = 2)
 cluster.fit(X_train)
+print(cluster.cluster_centers_indices_)
+#%%
 
 for index, row in X_train.iterrows():
     row = np.array(row)

@@ -45,7 +45,7 @@ combined_df = combined_df[['MLS', 'Price', 'Bedrooms','Age','Square_Footage','Ac
 combined_df = combined_df.set_index('MLS')
 combined_df.dropna()
 for index, row in combined_df.iterrows():
-    if (row['Age'] >= 4000) or (row['Acres']>5) or (row['Square_Footage']>20000) or (row['Square_Footage']<= 200) or (row['Combined_Baths']<1)or (row['Bedrooms']<1)or(row['Combined_Baths']>=12) or (row['Bedrooms']>=15)or (row['Price']<25000)or (row['Price']>750000):
+    if (row['Age'] >= 4000) or (row['Acres']>5) or (row['Square_Footage']>20000) or (row['Square_Footage']<= 500) or (row['Combined_Baths']<1)or (row['Bedrooms']<1)or(row['Combined_Baths']>=12) or (row['Bedrooms']>=15)or (row['Price']<50000)or (row['Price']>750000):
         try:
             combined_df.drop(index = index, inplace = True, axis = 1)
         except:
@@ -63,7 +63,7 @@ for index, row in combined_df.iterrows():
 combined_df.dropna(inplace=True)
 combined_df.reset_index()
 combined_df = combined_df.groupby('MLS').first()
-combined_df.to_csv('combined.csv')
+combined_df.to_csv('ML_combined.csv')
 # %%
 def Scatter_w_Trend(df,x,y, y_limit=None):
     try:

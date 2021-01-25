@@ -6,7 +6,7 @@ from sklearn.linear_model import LinearRegression
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.metrics import make_scorer
 import numpy as np
-file_location = "../CSVs/combined.csv"
+file_location = "../CSVs/ML_combined.csv"
 df = pd.read_csv(file_location).set_index("MLS")
 df = df[['Price', 'Bedrooms','Age','Square_Footage','Acres', 'Combined_Baths','Population Density','Median Home Value','Water_Land_Percent', 'Median Household Income', 'Years_since','CDOM']]
 df.dropna(inplace = True)

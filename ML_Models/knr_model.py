@@ -19,7 +19,7 @@ my_scorer = make_scorer(scoring_function, greater_is_better = True)
 knr_model = KNeighborsRegressor(
     n_jobs = -3,
     algorithm = 'auto',
-    leaf_size = 20,
+    leaf_size = 30,
     n_neighbors = 10,
     p = 1,
     weights = 'distance')
@@ -28,13 +28,12 @@ knr_model = knr_model.fit(X_train,y_train)
 print(f"Training Data Score: {knr_model.score(X_train, y_train)}")
 print(f"Testing Data Score: {knr_model.score(X_test, y_test)}")
 print(scoring_function(y_test, knr_model.predict(X_test)))
-
 # %%
 param_grid = {
     'n_neighbors':[3,4,5,6,7,8,9,10,15,20],
     'leaf_size':[10,20,30,40,50,60,70,80,90,100],
     'p': [1,2],
-    'weights':['distance'],
+    'weights':['uniform','distance'],
     'algorithm':['auto', 'ball_tree', 'kd_tree'],
     'n_jobs':[1]
 }
