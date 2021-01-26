@@ -8,7 +8,7 @@ from sklearn.metrics import make_scorer
 import numpy as np
 file_location = "../CSVs/ML_combined.csv"
 df = pd.read_csv(file_location).set_index("MLS")
-df = df[['Price', 'Bedrooms','Age','Square_Footage','Acres', 'Combined_Baths','Population Density','Median Home Value','Water_Land_Percent', 'Median Household Income', 'Years_since','CDOM']]
+df = df[['Price', 'Bedrooms','Age','Square_Footage','Acres', 'Full_Baths','Half_Baths','Population Density','Median Home Value','Water_Land_Percent', 'Median Household Income', 'Years_since','CDOM']]
 df.dropna(inplace = True)
 with open('pickle_jar/MLdf.pickle', 'wb') as kosher:
     pickle.dump(df,kosher)

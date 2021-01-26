@@ -116,11 +116,17 @@ def form():
         housesize =  int(request.form.get("housesize")) 
     except:
         housesize = 1600
-    house_info = (bedrooms, ageofhome, housesize, acres, baths, pop_dense, med_value, w_l_ratio, med_income, 0, 29)
+    try:
+        purchaseyear =  int(request.form.get("purchaseyear"))
+    except:
+        purchaseyear = 2021
+    years_since = 2021-purchaseyear
+    
+    house_info = (bedrooms, ageofhome, housesize, acres, bathrooms, halfbaths, pop_dense, med_value, w_l_ratio, med_income, years_since, 29)
     house_info = np.reshape(house_info,(1,-1))
     estimate = '${:,.2f}'.format(round(rf_model.predict(house_info)[0],2))
 # Bedrooms,	Age, Square_Footage, Acres, Combined_Baths, Population Density, Median Home Value, Water_Land_Percent, Median Household Income, Years_since, CDOM
-    return render_template('Predictive_Analysis.html', estimate = estimate, bathrooms = bathrooms, bedrooms = bedrooms, ageofhome = ageofhome, acres = acres, housesize = housesize)
+    return render_template('Predictive_Analysis.html', estimate = estimate, bathrooms = bathrooms, bedrooms = bedrooms, ageofhome = ageofhome, acres = acres, housesize = housesize, purchaseyear = purchaseyear)
 
 # this is how we send data to javascript
 @app.route("/api/TBD")

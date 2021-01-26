@@ -19,10 +19,10 @@ rf_model = RandomForestRegressor(
             random_state = 91, 
             n_jobs = -3, 
             max_features = 'sqrt', 
-            min_samples_leaf=7, 
-            min_samples_split=2, 
-            n_estimators = 160, 
-            max_depth = 25,
+            min_samples_leaf=2 ,
+            min_samples_split=8, 
+            n_estimators = 60, 
+            max_depth = 35,
             bootstrap = False)
 rf_model = rf_model.fit(X_train,y_train)
 #%%
@@ -31,11 +31,11 @@ print(f"Testing Data Score: {rf_model.score(X_test, y_test)}")
 print(scoring_function(y_test, rf_model.predict(X_test)))
 # %%
 param_grid = {
-    'max_depth':[12,25,50],
+    'max_depth':[12,25,35],
     'n_jobs':[1],
-    'min_samples_leaf': [15,6,7,8,9,10,11,12],
-    'min_samples_split': [2,3,4,5,6,7,8,9,10],
-    'n_estimators': [50],
+    'min_samples_leaf': [2,3,4,5,6,7,8,9,10],
+    'min_samples_split': [4,5,6,7,8,9,10],
+    'n_estimators': [100,110,125,135],
     'max_features':['auto','sqrt', 'log2'],
     'bootstrap':[True, False]
 }

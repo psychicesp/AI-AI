@@ -19,8 +19,8 @@ my_scorer = make_scorer(scoring_function, greater_is_better = True)
 knr_model = KNeighborsRegressor(
     n_jobs = -3,
     algorithm = 'auto',
-    leaf_size = 30,
-    n_neighbors = 10,
+    leaf_size = 20,
+    n_neighbors = 20,
     p = 1,
     weights = 'distance')
 knr_model = knr_model.fit(X_train,y_train)

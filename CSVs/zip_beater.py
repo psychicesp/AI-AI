@@ -21,7 +21,10 @@ combined_df['Combined_Baths'] = combined_df['Full_Baths']+(combined_df['Half_Bat
 missing_zips = pd.read_csv('MissingZips.csv').set_index('MLS')
 missing_zips.dropna(subset = ['RetZipCode'], inplace = True)
 for index, row in missing_zips.iterrows():
+    c = 0
     combined_df.loc[index, 'RetZipCode'] = row['RetZipCode']
+    c+= 1
+    print(c)
 # %%
 def num_cleaner(x):
     try:
@@ -41,11 +44,12 @@ combined_df['Median Household Income'] = combined_df['Median Household Income'].
 combined_df['Median Home Value'] = combined_df['Median Home Value'].apply(num_cleaner)
 combined_df['CDOM'] = combined_df['CDOM'].apply(num_cleaner)
 combined_df['Population Density'] = combined_df['Population Density'].apply(num_cleaner)
-combined_df = combined_df[['MLS', 'Price', 'Bedrooms','Age','Square_Footage','Acres', 'Combined_Baths','RetZipCode','Population Density','Median Home Value','Water_Land_Percent', 'Median Household Income', 'Status_Date', 'Days_since','Year_sold','Month_sold', 'Years_since', 'CDOM']]
+combined_df = combined_df[['MLS', 'Price', 'Bedrooms','Age','Square_Footage','Acres', 'Full_Baths','Half_Baths','RetZipCode','Population Density','Median Home Value','Water_Land_Percent', 'Median Household Income', 'Status_Date', 'Days_since','Year_sold','Month_sold', 'Years_since', 'CDOM', 'Combined_Baths']]
 combined_df = combined_df.set_index('MLS')
 combined_df.dropna()
 for index, row in combined_df.iterrows():
-    if (row['Age'] >= 4000) or (row['Acres']>5) or (row['Square_Footage']>20000) or (row['Square_Footage']<= 500) or (row['Combined_Baths']<1)or (row['Bedrooms']<1)or(row['Combined_Baths']>=12) or (row['Bedrooms']>=15)or (row['Price']<50000)or (row['Price']>750000):
+    c = 0
+    if (row['Age'] >= 4000) or (row['Acres']>5) or (row['Square_Footage']>20000) or (row['Square_Footage']<= 500) or (row['Full_Baths']<1)or (row['Bedrooms']<1)or(row['Combined_Baths']>=12) or (row['Bedrooms']>=15)or (row['Price']<50000)or (row['Price']>750000):
         try:
             combined_df.drop(index = index, inplace = True, axis = 1)
         except:
@@ -60,6 +64,8 @@ for index, row in combined_df.iterrows():
             combined_df.drop(index = index, inplace = True, axis = 1)
         except:
             pass
+    c+= 1
+    print(c)
 combined_df.dropna(inplace=True)
 combined_df.reset_index()
 combined_df = combined_df.groupby('MLS').first()
