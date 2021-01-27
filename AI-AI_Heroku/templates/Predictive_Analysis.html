@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Ai-Ai - Predictive Analysis</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="../static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+
+  <!-- Custom styles for this template -->
+  
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../static/css/heroic-features.css" rel="stylesheet">
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg text-black navbar-light">
+    <div class="container-fluid">
+      <a class="navbar-brand navbar-left" href="index.html" ></a>
+      <img src = "../Logos/PNG/BW_YellowBG.png"> 
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto navbar-right">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="StLouis_Overview.html">St. Louis Overview</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="Market_Analytics.html">Market Analysis</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Predictive Analysis</a>
+            <span class="sr-only">(current)</span>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="About_Us.html">About Us</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Content -->
+  <div class="header_container">
+    <div class="header_container">
+      <div class="row">
+          <div class="col-sm-12 text-center">
+              <h1>Predictive Analysis</h1>
+          </div>      
+      </div>
+      <header class="jumbotron my-4">
+        <img src="../Images/DataImg_1500x500.png" class="img-fluid" alt="jumbotron_logo">
+      </header>
+
+    <!-- Page Features -->
+    <!-- <script>
+      let bathrooms = {{ bathrooms }};
+      let bedrooms = {{ bedrooms }};
+      let ageofhome = {{ ageofhome }}
+      let acres = {{ acres }}
+      let housesize = {{ housesize }}
+    </script> -->
+    <form action = "/form" method ="POST">
+      <div class="form-row">
+        <div class="col-md-4 mb-3">
+          <label for="validationServer01">Zip Code</label>
+          <input type="number" class="form-control is-valid" id="validationServer01" placeholder="12345" name= 'zipcode' required>
+          <div class="valid-feedback">
+            Looks good!
+          </div>
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="validationServer02">Number of Bathrooms</label>
+          <input type="number" class="form-control is-valid" id="validationServer02" value= "{{ bathrooms }}" name= 'bathrooms' >
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="validationServer03">Number of 1/2 Bathrooms</label>
+            <input type="number" class="form-control is-valid" id="validationServer03" value = "0" name= 'halfbaths' >
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-md-4 mb-3">
+          <label for="validationServer04">Number of Bedrooms</label>
+          <input type="number" class="form-control is-valid" id="validationServer04" value = "{{ bedrooms }}" name= 'bedrooms' >
+         </div>
+        <div class="col-md-4 mb-3">
+          <label for="validationServer05">Year Purchased</label>
+          <input type="text" id="yearPicker" class="form-control is-valid" id="validationServer05" value = "{{ purchaseyear }}" name = 'purchaseyear'>
+          
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="validationServer06">Age of Home</label>
+          <input type="number" class="form-control is-valid" id="validationServer06" value = "{{ ageofhome }}" name = 'ageofhome' >
+         </div>
+      </div>
+      <div class="form-row">
+        <div class="col-md-4 mb-3">
+          <label for="validationServer07">Lot Size (Acres)</label>
+          <input type="number" class="form-control is-valid" id="validationServer07" value = "{{ acres }}" name ='acres' step = 0.001 >
+         </div>
+        <div class="col-md-4 mb-3">
+          <label for="validationServer08">House Size (Sq Ft)</label>
+          <input type="number" id="yearPicker" class="form-control is-valid" id="validationServer08" value = "{{ housesize }}" name = 'housesize'>
+          
+        </div>
+
+        
+        </div>
+        <button class="btn btn-primary" type="submit">Submit form</button>
+        
+        <!-- <div class="col-md-4 mb-3">
+          <label for="validationServer05">Age</label>
+          <input type="number" class="form-control is-invalid" id="validationServer05" placeholder="25" required>
+         </div> -->
+      </div>
+
+      
+      
+     
+    </form>
+    <!-- /.row -->
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <h3> The estimate cost of a property with your specifics is:</h3> <h2>{{ estimate }}</h2>
+        <div id="predictiveprice"></div>
+      </div>
+  </div>
+  <!-- /.container -->
+
+  <!-- Footer -->
+  <footer class="py-5">
+    <div class="container">
+      <p class="m-0 text-center text-black">Ai-Ai &copy;2021</p>
+      <p class="m-0 text-center text-black">Produced by John Loucks, Regan Maher and Eric Penrose.</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
